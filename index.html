@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Avalon Demo</title>
+        <script src="bower_components/requirejs/require.js" data-main="require_config.js"></script>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                width: 1000px;
+                margin: 20px auto;
+            }
+            .gap {
+                margin-bottom: 20px;
+            }
+            li {
+                list-style: none;
+            }
+            .close {
+                text-decoration: line-through;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" ms-controller="indexController">
+            <h1 style="text-align: center;">{{title}}</h1>
+
+            <h3 class="gap">form</h3>
+            <div ms-controller="formController">
+                <div class="gap">
+                    <input type="text" ms-duplex="text" data-duplex-changed="changedEvent">
+                    {{text}}
+                </div>
+                <div class="gap">
+                    <input type="checkbox" id="checkboxOne" ms-duplex-checked="checkboxOne">
+                    <label for="checkboxOne">选中一个chexkbox</label>
+                    &nbsp;&nbsp;{{checkboxOne}}
+                </div>
+                <div class="gap">
+                    <input type="checkbox" id="checkboxArrayOne" value="one" ms-duplex="checkboxArray" data-duplex-checked="changedEvent">
+                    <label for="checkboxArrayOne">one</label>
+                    <input type="checkbox" id="checkboxArrayTwo" value="two" ms-duplex="checkboxArray" data-duplex-checked="changedEvent">
+                    <label for="checkboxArrayTwo">two</label>
+                    <input type="checkbox" id="checkboxArrayThree" value="three" ms-duplex="checkboxArray" data-duplex-checked="changedEvent">
+                    <label for="checkboxArrayThree">three</label>
+                    &nbsp;&nbsp;{{checkboxArray.join(' ')}}
+                </div>
+                <div class="gap">
+                    <input type="radio" id="male" value="male" ms-duplex-string="radioString">
+                    <label for="male">男</label>
+                    <input type="radio" id="famale" value="famale" ms-duplex-string="radioString">
+                    <label for="famale">女</label>
+                    &nbsp;&nbsp;{{radioString}}
+                </div>
+                <div class="gap">
+                    <select ms-duplex="select" data-duplex-changed="changedEvent">
+                        <option value="">-- 请选择 ---</option>
+                        <option ms-repeat="selects" ms-attr-value="el">{{el}}</option>
+                    </select>
+                    &nbsp;&nbsp;{{select}}
+                </div>
+                <div class="gap">
+                    <ul class="gap">
+                        <li ms-repeat="languages">
+                            <input type="checkbox" ms-attr-id="'languages-'+$index" ms-duplex-checked="el.checked" data-duplex-changed="languageChanged">
+                            <label ms-attr-for="'languages-'+$index">{{el.name}}</label>
+                        </li>
+                    </ul>
+                    <div class="gap">
+                        选择的语言有：{{languagesSelect}}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gap">&nbsp;</div>
+            <h3 class="gap">todoMVC</h3>
+            <div class="gap" ms-controller="todoMvcController">
+                <div class="gap">
+                    <input type="text" ms-duplex="text" placeholder="add something" ms-keydown="textKeydown">
+                </div>
+                <ul class="gap">
+                    <li style="margin-bottom: 10px;">
+                        <input type="checkbox" ms-duplex-checked="selectAll" data-duplex-changed="allSelectChange"> {{selectAll ? '取消全选' : '全选'}}
+                    </li>
+                    <li ms-repeat="texts" ms-class="gap: $last">
+                        <input type="checkbox" ms-duplex-checked="el.checked" data-duplex-changed="oneSelectChange">
+                        <span ms-click="closeClick(el)" ms-dblclick="deleteClick($index)" ms-class="close: el.close">{{el.text}}</span>
+                    </li>
+                    <li class="gap" ms-if="texts.length>0">单击文字改变状态，双击文字删除改行记录</li>
+                </ul>
+            </div>
+
+            <div class="gap">&nbsp;</div>
+            <h3 class="gap">tree render</h3>
+            <div class="gap" ms-controller="treeController">
+                <h5 class="gap">采用非组件方式渲染</h5>
+                <ul ms-repeat="trees" class="gap">
+                    <li>
+                        <span ms-click="nameClick(el)">{{el.name}}</span>
+                        <div ms-include="'treeTemplate'" ms-if="el.child && el.child.length>0" style="margin-left: 10px"></div>
+                    </li>
+                </ul>
+
+                <h5 class="gap">采用组件方式渲染  (建议放弃组件)</h5>
+                <!-- 
+                    config="trees" 可以从父vm读取数据 但是不能直接使用vm.trees
+                    c="11" -> vm.c
+                    ms-attr-message="message" -> vm.message
+                 -->
+                <ms:tree config="trees" c="11" ms-attr-message="message"></ms:tree>
+            </div>
+        </div>
+
+        <script type="avalon" id="treeTemplate">
+            <ul ms-repeat="el.child">
+                <li>
+                    <span ms-click="nameClick(el)">{{el.name}}</span>
+                    <div ms-include="'treeTemplate'" ms-if="el.child && el.child.length>0" style="margin-left: 10px"></div>
+                </li>
+            </ul>
+        </script>
+    </body>
+</html>
