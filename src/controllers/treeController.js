@@ -29,7 +29,7 @@ define(function(require, exports, module) {
     avalon.component('ms:tree', {
         $template: template2,
         $init: function(vm, element) {
-            console.log(vm)
+            // console.log(vm)
         },
         $ready: function() {
             var _this = this;

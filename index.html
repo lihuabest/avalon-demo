@@ -8,6 +8,10 @@
                 padding: 0;
                 margin: 0;
             }
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
             .container {
                 width: 1000px;
                 margin: 20px auto;
@@ -20,6 +24,25 @@
             }
             .close {
                 text-decoration: line-through;
+            }
+
+            .dialog {
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.3);
+                position: fixed;
+                z-index: 10;
+            }
+            .dialog .dialog-content {
+                width: 200px;
+                height: 200px;
+                position: absolute;
+                transform: translateY(-50%) translateX(-50%);
+                top: 50%;
+                left: 50%;
+                background: #fff;
             }
         </style>
     </head>
@@ -110,6 +133,16 @@
                     ms-attr-message="message" -> vm.message
                  -->
                 <ms:tree config="trees" c="11" ms-attr-message="message"></ms:tree>
+            </div>
+
+            <div class="gap">&nbsp;</div>
+            <h3 class="gap">自定义组件</h3>
+            <div class="gap" ms-controller="dialogController">
+                <button ms-click="showDialogClick">显示dialog</button>
+                <ms:dialog config="dialogConfig" ms-visible="isShowDialog">
+                    <p slot="title" ms-click="titleClick">{{title}}</p>
+                    <span slot="content">我是内容</span>
+                </ms:dialog>
             </div>
         </div>
 

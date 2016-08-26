@@ -3,11 +3,13 @@ define(function(require, exports, module) {
     var formController    = require('formController');
     var todoMvcController = require('todoMvcController');
     var treeController    = require('treeController');
+    var dialogController  = require('dialogController');
 
     return {
         indexController  : indexController,
         formController   : formController,
         todoMvcController: todoMvcController,
-        treeController   : treeController
+        treeController   : treeController,
+        dialogController : dialogController
     };
 });
