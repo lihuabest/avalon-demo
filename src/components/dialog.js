@@ -22,7 +22,6 @@ define(function(require, exports, module) {
         content: '',
         type: 'alert',
         $ready: function(vm, elem, vms) {
-            console.log(vm)
 
             vm.okClick = function() {
                 vm['okClickCb'] && vm['okClickCb']();

@@ -1,6 +1,29 @@
 define(function(require, exports, module) {
     var avalon = require('avalon');
 
+    avalon.duplexHooks.integer = {
+        get: function(val, binding) {
+            if(val != '') {
+                var v = translate(val);
+                binding.element.value = v;
+                return v;
+            }
+        },
+        set: function(val) {
+            return val;
+        }
+    };
+
+    function translate(val) {
+        var old = val + '';
+
+        while(!/^[0-9]*$/.test(old)) {
+            old = old.substr(0, old.length - 1);
+        }
+
+        return Number(old);
+    }
+
     var vmodel = avalon.define({
         $id: 'formController',
         text: '',
@@ -31,11 +54,18 @@ define(function(require, exports, module) {
             });
 
             vmodel.languagesSelect = temp.join(' ');
-        }
+        },
+
+        inputNumber: ''
     });
 
-    vmodel.$watch("languages", function(l) {
+    vmodel.$watch('languages', function(l) {
         // console.log(l);
+    });
+
+    vmodel.$watch('inputNumber', function(value, oldValue) {
+        // var v = translate(value);
+        // vmodel.inputNumber = v;
     });
 
     return {

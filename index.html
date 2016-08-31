@@ -95,6 +95,11 @@
                         选择的语言有：{{languagesSelect}}
                     </div>
                 </div>
+                <div class="gap">
+                    <input type="text" ms-duplex-integer="inputNumber"><span>(我是只能输入整数的文本框)</span>
+                    <br>
+                    <span ms-text="inputNumber"></span>
+                </div>
             </div>
             
             <div class="gap">&nbsp;</div>
@@ -136,7 +141,7 @@
             </div>
 
             <div class="gap">&nbsp;</div>
-            <h3 class="gap">自定义组件</h3>
+            <h3 class="gap">自定义dialog组件</h3>
             <div class="gap" ms-controller="dialogController">
                 <button ms-click="showDialogClick">显示dialog</button>
                 <ms:dialog config="dialogConfig" ms-visible="isShowDialog">
