@@ -1,7 +1,7 @@
 require.config({
     baseUrl: './',
     paths: {
-        'avalon'           : './bower_components/avalon/dist/avalon.modern.shim',
+        'avalon'           : './bower_components/avalon/dist/avalon.mobile.shim',
         'jquery'           : './bower_components/jquery/dist/jquery',
 
         'controllers'      : './src/controllers/controllers',

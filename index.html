@@ -79,7 +79,7 @@
                 </div>
                 <div class="gap">
                     <select ms-duplex="select" data-duplex-changed="changedEvent">
-                        <option value="">-- 请选择 ---</option>
+                        <option value="">-- 请选择 --</option>
                         <option ms-repeat="selects" ms-attr-value="el">{{el}}</option>
                     </select>
                     &nbsp;&nbsp;{{select}}
@@ -145,8 +145,9 @@
             <div class="gap" ms-controller="dialogController">
                 <button ms-click="showDialogClick">显示dialog</button>
                 <ms:dialog config="dialogConfig" ms-visible="isShowDialog">
-                    <p slot="title" ms-click="titleClick">{{title}}</p>
-                    <span slot="content">我是内容</span>
+                    <div slot="content">我是一个测试
+                        <span>哈哈</span>
+                    </div>
                 </ms:dialog>
             </div>
         </div>

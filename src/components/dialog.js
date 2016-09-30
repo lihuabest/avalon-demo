@@ -4,7 +4,6 @@ define(function(require, exports, module) {
     var tpl = [
         '<div class="dialog">',
             '<div class="dialog-content">',
-                '<div class"dialog-title">{{title | html}}</div>',
                 '<div class"dialog-content">{{content | html}}</div>',
                 '<div>',
                     '<button ms-click="okClick">确定</button>',
@@ -22,7 +21,7 @@ define(function(require, exports, module) {
         content: '',
         type: 'alert',
         $ready: function(vm, elem, vms) {
-
+            console.log(vm)
             vm.okClick = function() {
                 vm['okClickCb'] && vm['okClickCb']();
             };
