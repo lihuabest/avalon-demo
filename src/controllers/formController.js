@@ -56,7 +56,19 @@ define(function(require, exports, module) {
             vmodel.languagesSelect = temp.join(' ');
         },
 
-        inputNumber: ''
+        inputNumber: '',
+
+        checkboxAll: [],
+        selectAllChange: function() {
+
+        },
+        checkboxAllClick: function() {
+            if(vmodel.checkboxAll.length) {
+                vmodel.checkboxAll.clear();
+            } else {
+                vmodel.checkboxAll.push('on');
+            }
+        }
     });
 
     vmodel.$watch('languages', function(l) {
